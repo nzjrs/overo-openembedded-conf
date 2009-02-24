@@ -1,0 +1,4 @@
+bitbake/
+org.openembedded.dev/
+sources/
+tmp/
