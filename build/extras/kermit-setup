@@ -8,3 +8,4 @@ set file type bin
 set rec pack 4096
 set send pack 4096
 set window 5
+connect
