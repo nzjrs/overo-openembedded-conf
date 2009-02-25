@@ -1,0 +1,79 @@
+diff -r 23b91e50e0e1 Makefile
+--- a/Makefile	Fri Sep 26 12:05:05 2008 +0200
++++ b/Makefile	Wed Oct 01 10:31:43 2008 +0200
+@@ -4,26 +4,26 @@
+ 
+ em28xx-dvb-objs   := em2880-dvb.o 
+ 
+-CONFIG_TUNER_XC3028:=m
+-CONFIG_DVB_EM2880:=m
+-CONFIG_VIDEO_EM28XX_AUDIO:=m
+-CONFIG_VIDEO_EM28XX_AUDIO_EP:=m
++CONFIG_TUNER_XC3028:=n
++CONFIG_DVB_EM2880:=n
++CONFIG_VIDEO_EM28XX_AUDIO:=n
++CONFIG_VIDEO_EM28XX_AUDIO_EP:=n
+ # audio ep is for devices which don't use the usb audio class
+ # for identifying audio. This was actually made to get around
+ # not having to use the microsoft audio driver in windows
+ 
+ CONFIG_VIDEO_EM28XX:=m
+-CONFIG_DECODER_CX25843:=m
+-CONFIG_DECODER_TVP5150:=m
+-CONFIG_TUNER_XC3028:=m
+-CONFIG_TUNER_XC5000:=m
+-CONFIG_TUNER_QT1010:=m
+-CONFIG_TUNER_MT2060:=m
+-CONFIG_DEMOD_DRX3973D:=m
+-CONFIG_DEMOD_LGDT3304:=m
+-CONFIG_DEMOD_ZL10353:=m
+-CONFIG_DVB_TUNER_ADIMTV102:=m
+-CONFIG_VIDEO_EM28XX_AAD:=m
++CONFIG_DECODER_CX25843:=n
++CONFIG_DECODER_TVP5150:=n
++CONFIG_TUNER_XC3028:=n
++CONFIG_TUNER_XC5000:=n
++CONFIG_TUNER_QT1010:=n
++CONFIG_TUNER_MT2060:=n
++CONFIG_DEMOD_DRX3973D:=n
++CONFIG_DEMOD_LGDT3304:=n
++CONFIG_DEMOD_ZL10353:=n
++CONFIG_DVB_TUNER_ADIMTV102:=n
++CONFIG_VIDEO_EM28XX_AAD:=n
+ 
+ obj-$(CONFIG_VIDEO_EM28XX)		+= em28xx.o
+ obj-$(CONFIG_VIDEO_EM28XX_AAD)          += em28xx-aad.o
+@@ -41,23 +41,23 @@
+ obj-$(CONFIG_TUNER_MT2060)		+= mt2060/
+ obj-$(CONFIG_DVB_TUNER_ADIMTV102)	+= adimtv102/
+ 
+-MDIR := kernel/drivers/media/video/em28xx
+-KVER := `if [ -d /lib/modules/2.6.21.4-eeepc ]; then echo 2.6.21.4-eeepc; else uname -r; fi`
++#MDIR := kernel/drivers/media/video/em28xx
++#KVER := `if [ -d /lib/modules/2.6.21.4-eeepc ]; then echo 2.6.21.4-eeepc; else uname -r; fi`
+ 
+-PWD := `pwd`
+-SDIR    := /lib/modules/$(KVER)/source
+-export SDIR
++#PWD := `pwd`
++#SDIR    := /lib/modules/$(KVER)/source
++#export SDIR
+ 
+-OLDMOD	:= /lib/modules/$(KVER)/kernel/drivers/media/video/em28xx/em28xx.ko # real modules dir
++#OLDMOD	:= /lib/modules/$(KVER)/kernel/drivers/media/video/em28xx/em28xx.ko # real modules dir
+ 
+-EXTRA_CFLAGS += -I$(PWD)/include -I$(SDIR)/drivers/media/video -I$(SDIR)/drivers/media/dvb/frontends -I$(SDIR)/drivers/media/dvb/dvb-core -I$(SDIR)/drivers/media/tuners/ -Iinclude/linux -Idrivers/media/video -Idrivers/media/dvb/frontends -Idrivers/media/dvb/dvb-core -Idrivers/media/tuners/ -Iinclude/linux -Wall -DCONFIG_DVB_ZL10353 -DCONFIG_DVB_DRX3973D -DDRXD_TYPE_B -DDRXD_TYPE_A  -DCONFIG_DVB_LGDT3304 -DCONFIG_MEDIA_TUNER_QT1010 -DCONFIG_DVB_TUNER_MT2060
+-export EXTRA_CFLAGS
++#EXTRA_CFLAGS += -I$(PWD)/include -I$(SDIR)/drivers/media/video -I$(SDIR)/drivers/media/dvb/frontends -I$(SDIR)/drivers/media/dvb/dvb-core -I$(SDIR)/drivers/media/tuners/ -Iinclude/linux -Idrivers/media/video -Idrivers/media/dvb/frontends -Idrivers/media/dvb/dvb-core -Idrivers/media/tuners/ -Iinclude/linux -Wall -DCONFIG_DVB_ZL10353 -DCONFIG_DVB_DRX3973D -DDRXD_TYPE_B -DDRXD_TYPE_A  -DCONFIG_DVB_LGDT3304 -DCONFIG_MEDIA_TUNER_QT1010 -DCONFIG_DVB_TUNER_MT2060
++#export EXTRA_CFLAGS
+ 
+-KDIR    := /lib/modules/$(KVER)/build
++#KDIR    := /lib/modules/$(KVER)/build
+ 
+ default:
+ 	rm -rf Module.symvers; 
+-	$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
++	$(MAKE) -C $(KERNELDIR) SUBDIRS=$(PWD) modules
+ 
+ install:
+ 	rm -rf $(OLDMOD); \

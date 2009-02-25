@@ -1,0 +1,31 @@
+= INTRODUCTION =
+You can build a working rootfs that autostarts osmgpsmap be bitbake albatross-x11-image
+
+= HACKS = 
+  * Change fontpath in default xorg.conf according to the following diff
+
+diff --git a/packages/xorg-xserver/xserver-xorg/xorg.conf b/packages/xorg-xserver/xserver-xorg/xorg.conf
+index 4b32702..bc04928 100644
+--- a/packages/xorg-xserver/xserver-xorg/xorg.conf
++++ b/packages/xorg-xserver/xserver-xorg/xorg.conf
+@@ -17,7 +17,7 @@ Section "Files"
+ # By default, Red Hat 6.0 and later now use a font server independent of
+ # the X server to render fonts.
+ #       FontPath     "unix/:7100"
+-	FontPath     "/usr/lib/X11/fonts/misc"
++	FontPath     "/usr/share/fonts/X11"
+ EndSection
+ 
+ Section "Module"
+
+= CONFIGURATION =
+* Directory structure
+
+john@nzjrs-uni:~/beagle/oe$ ls
+local@  opt/  org.beagleboard.dev/  org.openembedded.dev/  tmp/
+
+* local is checked out from https://svn......beagleboard/trunk/local
+
+* org.beagleboard.dev is checked out from https://svn......beagleboard/trunk/org.beagleboard.dev.john
+
+

@@ -1,0 +1,137 @@
+diff -r 23b91e50e0e1 em28xx-cards.c
+--- a/em28xx-cards.c	Fri Sep 26 12:05:05 2008 +0200
++++ b/em28xx-cards.c	Wed Oct 01 14:35:44 2008 +0200
+@@ -37,7 +37,7 @@
+ #else
+ #include <media/v4l2-chip-ident.h>
+ #endif
+-#include "msp3400-driver.h"
++//#include "msp3400-driver.h"
+ #include <media/saa7115.h>
+ #include "tvp5150/tvp5150.h"
+ 
+@@ -2584,7 +2584,15 @@
+ 			.type     = EM28XX_VMUX_COMPOSITE1,
+ 			.vmux     = SAA7115_COMPOSITE0,
+ 			.amux     = 1,
+-		}},
++		}, {
++			.type     = EM28XX_VMUX_COMPOSITE2,
++			.vmux     = SAA7115_COMPOSITE1,
++			.amux     = 1,
++		}, {
++			.type     = EM28XX_VMUX_COMPOSITE3,
++			.vmux     = SAA7115_COMPOSITE2,
++			.amux     = 1,
++		} },
+ 		.tvnorms	= {
+ 			{
+ 				.name = "PAL-BG",
+@@ -2728,11 +2736,13 @@
+ 			ret = em28xx_write_regs_req(dev, 0x00, 0x08, "\xf7", 1);
+ 			if (ret < 0)
+ 				return ret;
+-			udelay(2500);
++			udelay(2000);
++			udelay(500);
+ 			ret = em28xx_write_regs_req(dev, 0x00, 0x08, "\xff", 1);
+ 			if (ret < 0)
+ 				return ret;
+-			udelay(2500);
++			udelay(2000);
++			udelay(500);
+ 		}
+ #endif
+ 
+diff -r 23b91e50e0e1 em28xx-i2c.c
+--- a/em28xx-i2c.c	Fri Sep 26 12:05:05 2008 +0200
++++ b/em28xx-i2c.c	Wed Oct 01 14:35:45 2008 +0200
+@@ -41,7 +41,7 @@
+ #include <media/v4l2-common.h>
+ #include <media/tuner.h>
+ 
+-#include "dvb_frontend.h"
++//#include "dvb_frontend.h"
+ 
+ #include "xc5000/xc5000_control.h"
+ 
+@@ -810,7 +810,8 @@
+ 						__LINE__, __func__, ret);
+ 					return ret;
+ 				}
+-				udelay(2500);
++				udelay(2000);
++				udelay(500);
+ 				ret = em28xx_write_regs_req(dev, 0x00, 0x08,
+ 						"\xff", 1);
+ 				if (ret < 0) {
+@@ -820,7 +821,8 @@
+ 						__LINE__, __func__, ret);
+ 					return ret;
+ 				}
+-				udelay(2500);
++				udelay(2000);
++				udelay(500);
+ 			}
+ 		}
+ 		break;
+diff -r 23b91e50e0e1 em28xx-video.c
+--- a/em28xx-video.c	Fri Sep 26 12:05:05 2008 +0200
++++ b/em28xx-video.c	Wed Oct 01 14:35:45 2008 +0200
+@@ -35,7 +35,7 @@
+ #include <linux/i2c.h>
+ #include <linux/version.h>
+ #include <linux/video_decoder.h>
+-#include "dvb_frontend.h"
++//#include "dvb_frontend.h"
+ #if LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 15)
+ #include <linux/mutex.h>
+ #endif
+diff -r 23b91e50e0e1 em28xx-webcam.c
+--- a/em28xx-webcam.c	Fri Sep 26 12:05:05 2008 +0200
++++ b/em28xx-webcam.c	Wed Oct 01 14:35:45 2008 +0200
+@@ -30,7 +30,7 @@
+ 
+ #include <linux/init.h>
+ #include <linux/module.h>
+-#include <linux/pci.h>
++//#include <linux/pci.h>
+ #include <linux/delay.h>
+ #include <linux/i2c.h>
+ #include <linux/usb.h>
+diff -r 23b91e50e0e1 em28xx.h
+--- a/em28xx.h	Fri Sep 26 12:05:05 2008 +0200
++++ b/em28xx.h	Wed Oct 01 14:35:45 2008 +0200
+@@ -28,11 +28,11 @@
+ #include <linux/version.h>
+ #include <linux/videodev.h>
+ #include <linux/i2c.h>
+-#include <linux/dvb/frontend.h>
+-#include "dmxdev.h"
+-#include "dvb_demux.h"
+-#include "dvb_net.h"
+-#include "dvb_frontend.h"
++//#include <linux/dvb/frontend.h>
++//#include "dmxdev.h"
++//#include "dvb_demux.h"
++//#include "dvb_net.h"
++//#include "dvb_frontend.h"
+ #include <linux/soundcard.h>
+ 
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 25)
+@@ -545,6 +545,7 @@
+ 	EM28XX_LGDT330X,
+ };
+ 
++#if 0
+ struct em2880_dvb {
+ 	char *name;
+ 	struct dvb_demux demux;
+@@ -569,6 +570,7 @@
+ 	int (*init_override)(struct dvb_frontend *fe);
+ 	u16 dtv_packetsize; 
+ };
++#endif
+ 
+ struct em28xx_audio {
+ 	char name[50];
