@@ -1,20 +1,29 @@
 #!/bin/bash
-KERNEL_DIR=/media/bbkernel
-ROOTFS_DIR=/media/bbrootfs
-IMAGE=uImage-beagleboard.bin
-ROOTFS=console-image-beagleboard.tar
+KERNEL_DIR=/media/gskernel
+ROOTFS_DIR=/media/gsroot
+IMAGE=uImage-overo.bin
+UBOOT=u-boot-overo.bin
+MLO=MLO-overo-v0.90
+ROOTFS=omap3-console-image-overo.tar.bz2
 
-echo "===== BEAGLEBOARD                 ====="
+echo "===== OVERO                       ====="
 
-if [ -z $OE_HOME ] ; then
+export `bitbake -e 2>/dev/null | grep "^TOPDIR=" | sed 's/"//g'`
+export `bitbake -e 2>/dev/null | grep "^DEPLOY_DIR_IMAGE=" | sed 's/"//g'`
+export `bitbake -e 2>/dev/null | grep "^DL_DIR=" | sed 's/"//g'`
+
+if [ -z $TOPDIR ] ; then
     echo "ERROR: OE environment not found"
     exit 1
 fi
 
-export `bitbake -e 2>/dev/null | grep "^DEPLOY_DIR_IMAGE=" | sed 's/"//g'`
-
 if [ -z $DEPLOY_DIR_IMAGE ] ; then
     echo "ERROR: OE deployment dir not found"
+    exit 1
+fi
+
+if [ -z $DL_DIR ] ; then
+    echo "ERROR: OE source download dir not found"
     exit 1
 fi
 
@@ -35,10 +44,11 @@ if [ ! -f $MODULES ] ; then
 fi
 
 echo "Extract rootfs to $ROOTFS_DIR (Y/N)"
+
 read -n 1 -s ky
 if [ "$ky" == "Y" ] ; then
     echo "===== EXTRACTING ROOT FILE SYSTEM ====="
-    sudo tar xvf $DEPLOY_DIR_IMAGE/$ROOTFS -C $ROOTFS_DIR > /tmp/extract.log
+    sudo tar xjvf $DEPLOY_DIR_IMAGE/$ROOTFS -C $ROOTFS_DIR > /tmp/extract.log
 fi
 
 echo "Extract kernel modules to $ROOTFS_DIR (Y/N)"
@@ -50,36 +60,26 @@ fi
 
 cp /tmp/extract.log .
 
+echo "Copy MLO to $KERNEL_DIR (Y/N)"
+read -n 1 -s mlo
+if [ "$mlo" == "Y" ] ; then
+    echo "===== COPYING MLO                 ====="
+    cp $DL_DIR/$MLO $KERNEL_DIR/MLO
+fi
+
+echo "Copy u-boot to $KERNEL_DIR (Y/N)"
+read -n 1 -s ubt
+if [ "$ubt" == "Y" ] ; then
+    echo "===== COPYING U-BOOT              ====="
+    cp $DEPLOY_DIR_IMAGE/$UBOOT $KERNEL_DIR/u-boot.bin
+fi
+
 echo "Copy kernel to $KERNEL_DIR (Y/N)"
 read -n 1 -s rfsy
 if [ "$rfsy" == "Y" ] ; then
     echo "===== COPYING KERNEL              ====="
     cp $DEPLOY_DIR_IMAGE/$IMAGE $KERNEL_DIR/uImage
 fi
-
-# See
-# http://www.angstrom-distribution.org/demo/beagleboard/README.txt
-# http://elinux.org/BeagleBoardNAND
-
-echo "Download MLO and copy to $KERNEL_DIR (Y/N)"
-read -n 1 -s mlo
-if [ "$mlo" == "Y" ] ; then
-    echo "===== DOWNLOADING MLO             ====="
-    wget -q http://www.angstrom-distribution.org/demo/beagleboard/MLO -O $KERNEL_DIR/mlo
-    wget -q http://www.angstrom-distribution.org/demo/beagleboard/x-load.bin.ift -O $KERNEL_DIR/x-load.bin.ift
-fi
-
-echo "Download u-boot and copy to $KERNEL_DIR (Y/N)"
-read -n 1 -s ubt
-if [ "$ubt" == "Y" ] ; then
-    echo "===== DOWNLOADING UBOOT           ====="
-    wget -q http://www.angstrom-distribution.org/demo/beagleboard/u-boot.bin -O $KERNEL_DIR/u-boot.bin
-    wget -q http://www.angstrom-distribution.org/demo/beagleboard/README.txt -O $KERNEL_DIR/README.txt
-fi
-
-
-
-
 
 echo "===== UNMOUNTING ROOT FILE SYSTEM ====="
 sudo umount $ROOTFS_DIR
