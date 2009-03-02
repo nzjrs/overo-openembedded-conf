@@ -105,7 +105,7 @@ IMAGE_INSTALL = "\
 ##    irssi \
 #    mplayer omapfbplay \
 #    xcalc \
-    osm-gps-map"
+    simple-video-viewer"
 
 IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
 
