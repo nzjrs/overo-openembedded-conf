@@ -1,10 +1,14 @@
 #!/bin/bash
 KERNEL_DIR=/media/gskernel
 ROOTFS_DIR=/media/gsroot
-IMAGE=uImage-overo.bin
+
 UBOOT=u-boot-overo.bin
 MLO=MLO-overo-v0.90
-ROOTFS=omap3-console-image-overo.tar.bz2
+
+IMAGE=uImage-overo.bin
+ROOTFS=xterminal-image-overo.tar.bz2
+#ROOTFS=omap3-console-image-overo.tar.bz2
+
 
 echo "===== OVERO                       ====="
 
