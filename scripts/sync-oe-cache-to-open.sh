@@ -1,5 +1,5 @@
 #!/bin/sh
-HERE="/home/john/overo-oe/sources/"
+HERE="$HOME/overo-oe/sources/"
 THERE="git@open.grcnz.com:/mnt/datadisk/openembedded/"
 
 rsync -rlptDP $HERE $THERE
