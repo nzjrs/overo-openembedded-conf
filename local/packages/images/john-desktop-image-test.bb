@@ -4,19 +4,10 @@ DEPENDS = "task-base"
 
 IMAGE_LINGUAS = ""
 
-#Uncomment this, otherwise you get failed build, xserver-fbdev is borked
-#You really don't want to be using kdrive on an omap3, it's slow, buggy and EOL'ed.
-#Actually, scratch that. It seems to be defined in the gunstix machine.conf
-#XSERVER ?= "xserver-xorg \
-#           xf86-input-evdev \
-#           xf86-input-mouse \
-#           xf86-video-fbdev \
-#           xf86-input-keyboard \
-#"
-
-
 APPS = " \
   simple-video-viewer \
+  opencvtest \
+  simplehelloworld \
 "
 
 IMAGE_INSTALL += " \
