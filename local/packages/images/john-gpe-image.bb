@@ -17,10 +17,9 @@ IMAGE_INSTALL += " \
   task-proper-tools \
   angstrom-x11-base-depends \
   gpe-dm \
-  gpe-session-scripts \
-  gpe-login \
+  x11-session-scripts \
   matchbox-wm \
-  gpe-terminal \
+  xterm \
 "
 
 IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
