@@ -13,7 +13,7 @@ export BBPATH="${OVEROTOP}/build:${USERBRANCH}:${OEBRANCH}"
 
 if [ "$PS1" ]; then
    if [ "$BASH" ]; then
-     export PS1="\[\033[01;32m\]overo\[\033[00m\] ${PS1}"
+     export PS1="\[\033[02;32m\]overo\[\033[00m\] ${PS1}"
    fi
 fi
 
