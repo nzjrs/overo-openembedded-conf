@@ -8,6 +8,7 @@ APPS = " \
   simple-video-viewer \
   opencvtest \
   simplehelloworld \
+  firefly-mv-utils \
 "
 
 IMAGE_INSTALL += " \
