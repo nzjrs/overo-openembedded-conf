@@ -49,7 +49,7 @@ echo "Clear existing FS on $ROOTFS_DIR (Y/N)"
 
 read -n 1 -s ky
 if [ "$ky" == "Y" ] ; then
-    echo "===== DELETING sdcard/* ====="
+    echo "===== DELETING sdcard/*           ====="
     sudo rm -rf $ROOTFS_DIR/*
 fi
 
