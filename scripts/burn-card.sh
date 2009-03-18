@@ -6,9 +6,7 @@ UBOOT=u-boot-overo.bin
 MLO=MLO-overo-v0.90
 
 IMAGE=uImage-overo.bin
-ROOTFS=xterminal-image-overo.tar.bz2
-#ROOTFS=omap3-console-image-overo.tar.bz2
-
+ROOTFS=john-gpe-image-overo.tar.bz2
 
 echo "===== OVERO                       ====="
 
