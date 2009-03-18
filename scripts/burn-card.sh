@@ -47,6 +47,14 @@ if [ ! -f $MODULES ] ; then
     exit 1
 fi
 
+echo "Clear existing FS on $ROOTFS_DIR (Y/N)"
+
+read -n 1 -s ky
+if [ "$ky" == "Y" ] ; then
+    echo "===== DELETING sdcard/* ====="
+    sudo rm -rf $ROOTFS_DIR/*
+fi
+
 echo "Extract rootfs to $ROOTFS_DIR (Y/N)"
 
 read -n 1 -s ky
