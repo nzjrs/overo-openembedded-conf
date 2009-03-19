@@ -9,6 +9,8 @@ APPS = " \
   opencvtest \
   simplehelloworld \
   firefly-mv-utils \
+  iozone3 \
+  latencytop \
 "
 
 IMAGE_INSTALL += " \
