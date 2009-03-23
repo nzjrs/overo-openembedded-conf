@@ -11,6 +11,7 @@ APPS = " \
   firefly-mv-utils \
   iozone3 \
   latencytop \
+  opencv \
 "
 
 IMAGE_INSTALL += " \
