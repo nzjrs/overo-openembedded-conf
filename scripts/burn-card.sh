@@ -6,7 +6,7 @@ UBOOT=u-boot-overo.bin
 MLO=MLO-overo-v0.90
 
 IMAGE=uImage-overo.bin
-ROOTFS=john-gpe-image-overo.tar.bz2
+ROOTFS=john-gpe-image-overo.tar
 
 echo "===== OVERO                       ====="
 
@@ -58,7 +58,7 @@ echo "Extract rootfs to $ROOTFS_DIR (Y/N)"
 read -n 1 -s ky
 if [ "$ky" == "Y" ] ; then
     echo "===== EXTRACTING ROOT FILE SYSTEM ====="
-    sudo tar xjvf $DEPLOY_DIR_IMAGE/$ROOTFS -C $ROOTFS_DIR > /tmp/extract.log
+    sudo tar xvf $DEPLOY_DIR_IMAGE/$ROOTFS -C $ROOTFS_DIR > /tmp/extract.log
 fi
 
 echo "Extract kernel modules to $ROOTFS_DIR (Y/N)"
