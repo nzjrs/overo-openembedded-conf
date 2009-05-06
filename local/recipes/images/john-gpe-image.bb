@@ -12,6 +12,7 @@ APPS = " \
   iozone3 \
   latencytop \
   opencv \
+  emav-data-collection \
 "
 
 IMAGE_INSTALL += " \
