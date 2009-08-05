@@ -4,7 +4,7 @@
 
 export BB_ENV_EXTRAWHITE="MACHINE DISTRO ANGSTROM_MODE OVEROTOP OEBRANCH USERBRANCH"
 
-export OVEROTOP="${HOME}/overo-oe"
+export OVEROTOP="${HOME}/overo-oe-plain"
 export OEBRANCH="${OVEROTOP}/org.openembedded.dev"
 export USERBRANCH="${OVEROTOP}/local"
 
@@ -13,7 +13,7 @@ export BBPATH="${OVEROTOP}/build:${USERBRANCH}:${OEBRANCH}"
 
 if [ "$PS1" ]; then
    if [ "$BASH" ]; then
-     export PS1="\[\033[02;32m\]overo\[\033[00m\] ${PS1}"
+     export PS1="\[\033[02;32m\]overo-plain\[\033[00m\] ${PS1}"
    fi
 fi
 

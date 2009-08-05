@@ -5,14 +5,14 @@ DEPENDS = "task-base"
 IMAGE_LINGUAS = ""
 
 APPS = " \
-  simple-video-viewer \
-  opencvtest \
+#  simple-video-viewer \
+#  opencvtest \
   simplehelloworld \
   firefly-mv-utils \
   iozone3 \
   latencytop \
-  opencv \
-  emav-data-collection \
+#  opencv \
+#  emav-data-collection \
 "
 
 IMAGE_INSTALL += " \
