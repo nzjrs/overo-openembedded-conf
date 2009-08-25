@@ -3,7 +3,7 @@ KERNEL_DIR=/media/gskernel
 ROOTFS_DIR=/media/gsroot
 
 UBOOT=u-boot-overo.bin
-MLO=MLO-overo-v0.90
+MLO=MLO-overo-v0.92
 
 IMAGE=uImage-overo.bin
 ROOTFS=john-gpe-image-overo.tar
