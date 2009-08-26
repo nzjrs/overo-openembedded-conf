@@ -91,6 +91,13 @@ if [ "$rfsy" == "Y" ] ; then
     cp $DEPLOY_DIR_IMAGE/$IMAGE $KERNEL_DIR/uImage
 fi
 
+echo "Copy overlay to $ROOTFS_DIR (Y/N)"
+read -n 1 -s ol
+if [ "$ol" == "Y" ] ; then
+    echo "===== COPYING OVERLAY              ====="
+    sudo rsync -avL $TOPDIR/overlay/ $ROOTFS_DIR
+fi
+
 echo "===== UNMOUNTING ROOT FILE SYSTEM ====="
 sudo umount $ROOTFS_DIR
 echo "===== UNMOUNTING KERNEL           ====="
