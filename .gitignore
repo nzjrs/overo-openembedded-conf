@@ -4,5 +4,3 @@ bitbake/
 org.openembedded.dev/
 sources/
 tmp/
-
-overlay
