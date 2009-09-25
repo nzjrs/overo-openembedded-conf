@@ -3,7 +3,7 @@ KERNEL_DIR=/media/gskernel
 ROOTFS_DIR=/media/gsroot
 
 UBOOT=u-boot-overo.bin
-MLO=MLO-overo-v0.92
+MLO=MLO-overo
 
 IMAGE=uImage-overo.bin
 ROOTFS=john-gpe-image-overo.tar
@@ -48,12 +48,13 @@ fi
 MODULES_FILE=$(basename $MODULES)
 IMAGE_FILE=$(readlink $DEPLOY_DIR_IMAGE/$IMAGE)
 UBOOT_FILE=$(readlink $DEPLOY_DIR_IMAGE/$UBOOT)
+MLO_FILE=$(readlink $DEPLOY_DIR_IMAGE/$MLO)
 
 echo "SUMMARY:"
 echo "    kernel: $IMAGE_FILE"
 echo "    kernel modules: $MODULES_FILE"
 echo "    uboot: $UBOOT_FILE"
-echo "    MLO: $MLO"
+echo "    MLO: $MLO_FILE"
 echo "    kernel dir: $KERNEL_DIR"
 echo "    rootfs dir: $ROOTFS_DIR"
 echo
@@ -87,7 +88,7 @@ echo "Copy MLO to $KERNEL_DIR (Y/N)"
 read -n 1 -s mlo
 if [ "$mlo" == "Y" ] ; then
     echo "===== COPYING MLO"
-    cp $DL_DIR/$MLO $KERNEL_DIR/MLO
+    cp $DEPLOY_DIR_IMAGE/$MLO $KERNEL_DIR/MLO
 fi
 
 echo "Copy u-boot to $KERNEL_DIR (Y/N)"
