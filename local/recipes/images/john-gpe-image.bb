@@ -18,6 +18,7 @@ APPS = " \
 IMAGE_INSTALL += " \
   ${XSERVER} \
   ${APPS} \
+  libertas-sd-firmware \
   task-base-extended \
   task-proper-tools \
   angstrom-x11-base-depends \
